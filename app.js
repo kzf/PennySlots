@@ -15,7 +15,7 @@ var bodys = [];
 
 var boxGeom = new THREE.BoxGeometry(100, 100, 100);
 
-var cylGeom = new THREE.CylinderGeometry(15, 15, 3, 2);
+var cylGeom = new THREE.CylinderGeometry(20, 20, 3, 32);
 
 var OIMOMesh = function(options, material) {
 	this.mtx = new THREE.Matrix4();
@@ -46,6 +46,7 @@ var OIMOMeshC = function(options, material) {
     this.mesh.position.y = options.pos[1];
     this.mesh.position.z = options.pos[2];
   }
+  this.mesh.rotation.y = 1;
 }
 
 function init() {
@@ -264,14 +265,15 @@ function onWindowResize() {
 
 addEventListener("keydown", function(e) {
 	if (e.keyCode == 32) {
-		var coin = new OIMOMesh({
-					type: 'box',
-					size: [20, 20, 3],
-					pos: [Math.random()*400-200, 226, -170],
+		var coin = new OIMOMeshC({
+					type: 'cylinder',
+					size: [1, 1, 1],
+					//pos: [Math.random()*400-200, 226, -170],
+                    pos: [Math.random()*400-200, 226, -120],
 					move: true,
 					world: world
 				}, new THREE.MeshLambertMaterial({ color: "#FF0000" }));
-          
+        coin.mesh.rotation.x = 45;
               scene.add(coin.mesh);
               meshs.push(coin.mesh);
               bodys.push(coin.body);
